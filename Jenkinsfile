@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    tools{ jdk 'jdk 8u221'}
+    tools{ 
+            jdk 'jdk 8u221'
+          }
     stages {     
         stage ('Initialize') {
                  steps {
