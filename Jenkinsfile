@@ -3,13 +3,13 @@ pipeline {
     tools{ jdk 'jdk 8u221'}
     stages {     
         stage ('Initialize') {
-            steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                ''' 
-            }
-        }
+                 steps {
+                     sh '''
+                          echo "PATH = ${PATH}"
+                          echo "M2_HOME = ${M2_HOME}"
+                         ''' 
+                         }
+                                 }
         stage ('Compile Stage') {
 
             steps {
