@@ -1,22 +1,12 @@
 pipeline {
     agent any
-    tools{ 
-            jdk 'jdk 8u221'
-          }
-    stages {     
-        stage ('Initialize') {
-                 steps {
-                     sh '''
-                          echo "PATH = ${PATH}"
-                          echo "M2_HOME = ${M2_HOME}"
-                         ''' 
-                         }
-                                 }
+
+    stages {
         stage ('Compile Stage') {
 
             steps {
-                withmaven(maven : 'maven3.5.0') {
-                    sh "mvn clean compile"
+                withMaven(maven : 'maven3.3.3') {
+                    sh 'mvn clean compile'
                 }
             }
         }
@@ -24,8 +14,8 @@ pipeline {
         stage ('Testing Stage') {
 
             steps {
-                withmaven(maven : 'maven3.6.1') {
-                    sh "mvn test"
+                withMaven(maven : 'maven3.3.3') {
+                    sh 'mvn test'
                 }
             }
         }
@@ -33,8 +23,8 @@ pipeline {
 
         stage ('install Stage') {
             steps {
-                withmaven(maven : 'maven3.6.1') {
-                    sh "mvn install"
+                withMaven(maven : 'maven3.3.3') {
+                    sh 'mvn install'
                 }
             }
         }
