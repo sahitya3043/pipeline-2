@@ -1,24 +1,23 @@
 pipeline {
-  agent any
-  tools {
-    withMaven(mavenOpts: MAVEN_OPTS, maven: 'M3', mavenLocalRepo: MAVEN_LOCAL_REPOSITORY, mavenSettingsConfig: MAVEN_SETTINGS) {
-    sh "mvn ..."
-    maven 'M3'
-  }
-    
-  stages {
-      stage('Build') {
-       def mvnHome = tool 'M3'
-       sh '''for f in i7j-*; do
-                 (cd $f && ${mvnHome}/bin/mvn clean package)
-             done
-             wait'''
-   }
-    stage('Build') {
-      steps {
-        sh 'mvn -B -DskipTests clean package'
-      }
-    }
-  }
-}
+	agent any
+	stages {
+		stage('---clean---'){
+			withMaven(maven:'maven 3.6.0')
+			steps {
+				sh "mvn clean"
+			}
+		}
+		stage('---test---') {
+			withMaven(maven:'maven 3.5.0')
+			steps {
+				sh "mvn test"
+			}
+		}
+		stage('---package---'){
+			withMaven(maven:'maven3.3.3')
+			steps {
+				sh "mvn package"
+			}
+		}
+	}
 }
