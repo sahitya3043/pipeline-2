@@ -3,7 +3,10 @@ pipeline {
 	stages {
 		stage('---clean---'){
 			steps {
-				withMaven(maven: 'maven 3.5.0')
+				 tools { 
+       					 maven "maven 3.5.0" 
+      					  jdk 'jdk 8u221' 
+   					 }
 				sh "mvn clean"
 			}
 		}
